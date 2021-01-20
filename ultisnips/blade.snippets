@@ -1,0 +1,282 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+snippet @if "Laravel Blade Snippet if" b
+@if( ${1} )
+	${2}
+@endif${3}
+endsnippet
+snippet @fore "Laravel Blade Snippet foreach" b
+@foreach($${1} as $${2})	
+	${3}
+@endforeach
+${4}
+endsnippet
+snippet Form-text "Laravel Blade Snippet Form::text()" b
+{!! Form::${1:text}(${2}, ${3:null}, ['class' => 'form-control${4}']) !!}${5}
+endsnippet
+snippet HTML-s "Laravel Blade Collective Snippet HTML::script()" b
+{!! HTML::script('js/${1}.js')!!}
+${2}
+endsnippet
+snippet basic "Basic Blade Template"
+@extends('layout.master')
+
+@section('title') 
+Klinik Jati Elok | ${1}
+
+@stop
+@section('page-title') 
+<h2>$1</h2>
+<ol class="breadcrumb">
+	  <li>
+		  <a href="{{ url('laporans')}}">Home</a>
+	  </li>
+	  <li class="active">
+		  <strong>$1</strong>
+	  </li>
+</ol>
+
+@stop
+@section('content') 
+	${2}
+@stop
+@section('footer') 
+	
+@stop
+endsnippet
+snippet Form "blade form open" b
+	{!! Form::open(['url' => '${1}', 'method' => '${2}']) !!}
+		${3}
+	{!! Form::close() !!}
+endsnippet
+snippet form-submit "Laravel Blade Submit Form-group" b
+	<div class="form-group">
+	  {!! Form::submit('submit', ['class' => 'btn btn-success btn-block btn-lg']) !!}
+	</div> ${1}
+endsnippet
+snippet Form-file  "Laravel Blade template Form-file" b
+	<div class="form-group{{ $errors->has('$1') ? ' has-error' : '' }}">
+		{!! Form::label('${1}', '${2}') !!}
+		{!! Form::file('$1') !!}
+			@if (isset($${3}) && $$3->$1)
+				<p> {!! HTML::image(asset('${4:root directory}/'.$$3->$1), null, ['class'=>'img-rounded upload']) !!} </p>
+			@else
+				<p> {!! HTML::image(asset('img/photo_not_available.png'), null, ['class'=>'img-rounded upload']) !!} </p>
+			@endif
+		{!! $errors->first('$1', '<p class="help-block">:message</p>') !!}
+	</div>
+endsnippet
+snippet rcfg
+	<div class="row">
+		<div class="col-xs-12 col-sm-${1:12} col-md-$1 col-lg-$1">
+			<div class="form-group @if($errors->has('${2:name}'))has-error @endif">
+			  {!! Form::label('$2', '${3:Nama}', ['class' => 'control-label']) !!}
+				{!! Form::${4:text}('$2', ${5:lists-select-only,} ${6:null}, array(
+					'class'         => 'form-control${7}'
+				))!!}
+			  @if($errors->has('$2'))<code>{{ $errors->first('$2') }}</code>@endif
+			</div>
+		</div>
+	</div>
+endsnippet
+snippet Form-submit "Laravel Form-submit template" b
+	<div class="row">
+		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+			@if(isset($update))
+				<button class="btn btn-success btn-block" type="button" onclick='dummySubmit(this);return false;'>Update</button>
+			@else
+				<button class="btn btn-success btn-block" type="button" onclick='dummySubmit(this);return false;'>Submit</button>
+			@endif
+			{!! Form::submit('Submit', ['class' => 'btn btn-success hide', 'id' => 'submit']) !!}
+		</div>
+		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+			<a class="btn btn-danger btn-block" href="{{ url('home/${1}') }}">Cancel</a>
+		</div>
+	</div>
+	<script type="text/javascript" charset="utf-8">
+		function dummySubmit(control){
+			if(validatePass2(control)){
+				$('#submit').click();
+			}
+		}
+	</script>
+endsnippet
+snippet panel
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">${1}</h3>
+		</div>
+		<div class="panel-body">
+			${2}
+		</div>
+	</div>
+endsnippet
+snippet rc
+	<div class="row">
+		<div class="col-xs-12 col-sm-${1} col-md-$1 col-lg-$1">
+			${2}
+		</div>
+	</div>
+endsnippet
+snippet c
+	<div class="col-xs-12 col-sm-${1} col-md-$1 col-lg-$1">
+		${2}
+	</div>
+endsnippet
+snippet r
+	<div class="row">
+		${1}
+	</div>
+endsnippet
+snippet form-image
+	<div class="form-group{{ $errors->has('${1}') ? ' has-error' : '' }}">
+		{!! Form::label('$1', '${2}') !!}
+		{!! Form::file('$1') !!}
+			@if (isset($${3}) && $$3->${4})
+				<p> {!! Html::image(asset($$3->$1), null, ['class'=>'img-rounded upload']) !!} </p>
+			@else
+				<p> {!! Html::image(asset('img/photo_not_available.png'), null, ['class'=>'img-rounded upload']) !!} </p>
+			@endif
+		{!! $errors->first('$1', '<p class="help-block">:message</p>') !!}
+	</div>
+endsnippet
+snippet kulit
+	@extends('master')
+
+	@section('title') 
+	PPDS DV | ${1}
+
+	@stop
+	@section('breadcrumb') 
+	<h2>$1</h2>
+	<ol class="breadcrumb">
+		  <li>
+			  <a href="{{ url('home')}}">home</a>
+		  </li>
+		  <li class="active">
+			  <strong>$1</strong>
+		  </li>
+	</ol>
+	@stop
+	@section('content') 
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<div class="panelLeft">$1</div>
+					<div class="panelRight">
+						<a class="btn btn-primary" href="{{ url('${2}/create') }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Buat ${3} Baru</a>
+					</div>
+				</h3>
+			</div>
+			<div class="panel-body">
+				${4}
+			</div>
+		</div>
+	@stop
+	@section('footer') 
+	@stop
+endsnippet
+snippet Form-delete
+	<td> 
+		{!! Form::open(['url' => '${1}/' .$${2}->id, 'method' => 'delete']) !!}
+			<a class="btn btn-success btn-xs" href="{{ url('$1/' . $$2->id . '/edit') }}">Edit</a>
+			{!! Form::submit('Delete', [
+				'class'   => 'btn btn-danger btn-xs',
+				'onclick' => 'return confirm("Anda yakin mau menghapus ' . $$2->id . '-' . $$2->name.'?");return false;'
+			]) !!}
+		{!! Form::close() !!}
+	</td>
+endsnippet
+snippet @ifelse
+	@if( ${1} )
+		${2}
+	@else
+		${3}
+	@endif
+endsnippet
+snippet laratable
+	<div class="table-responsive">
+		<table class="table table-hover table-condensed table-bordered">
+			<thead>
+				<tr>
+					<th>${1}</th>
+				</tr>
+			</thead>
+			<tbody>
+				@if($${2:model}->count() > 0)
+					@foreach($$2 as $${3})
+						<tr>
+							<td>{{ $$3->${4} }}</td>
+							<td nowrap class="autofit">
+								{!! Form::open(['url' => '$2/' . $$3->id, 'method' => 'delete']) !!}
+									<a class="btn btn-warning btn-sm" href="{{ url('$2/' . $$3->id . '/edit') }}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</a>
+									<button class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin ingin menghapus {{ $3->id }} - {{ $3->${5} }} ?')" type="submit"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</button>
+								{!! Form::close() !!}
+							</td>
+						</tr>
+					@endforeach
+				@else
+					<tr>
+						<td colspan="${6}">
+							{!! Form::open(['url' => '$2/imports', 'method' => 'post', 'files' => 'true']) !!}
+								<div class="form-group">
+									{!! Form::label('file', 'Data tidak ditemukan, upload data?') !!}
+									{!! Form::file('file') !!}
+									{!! Form::submit('Upload', ['class' => 'btn btn-primary', 'id' => 'submit']) !!}
+								</div>
+							{!! Form::close() !!}
+						</td>
+					</tr>
+				@endif
+			</tbody>
+		</table>
+	</div>
+	${6}
+endsnippet
+snippet form-group
+<div class="form-group @if($errors->has('$1')) has-error @endif">
+  {!! Form::label('${1}', '${2}', ['class' => 'control-label']) !!}
+  {!! Form::${3:text}('$1' ${4}, ${5:null}, ['class' => 'form-control${6}']) !!}
+  @if($errors->has('$1'))<code>{{ $errors->first('$1') }}</code>@endif
+</div>${7}
+endsnippet
+snippet tab "bootstrap tab" b
+	<div>
+
+	  <!-- Nav tabs -->
+	  <ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="#${1}" aria-controls="$1" role="tab" data-toggle="tab">${2}</a></li>
+		<li role="presentation"><a href="#${3}" aria-controls="$3" role="tab" data-toggle="tab">${4}</a></li>
+	  </ul>
+
+	  <!-- Tab panes -->
+	  <div class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="$1">${5}</div>
+		<div role="tabpanel" class="tab-pane" id="$3">${6}</div>
+	  </div>
+
+	</div>
+endsnippet

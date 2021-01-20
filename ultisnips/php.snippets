@@ -1,0 +1,479 @@
+snippet middleware-admin "laravel admin middleware" b
+public function __construct()
+{
+	$this->middleware('admin', ['except' => []]);
+}
+endsnippet
+snippet t "oop $this->" b
+$this->${0}
+endsnippet
+snippet f "function" b
+function ${1}(${3})
+{
+	${0}
+}
+endsnippet
+snippet m "method"
+${1:protected} function ${2:foo}()
+{
+	${0}
+}
+endsnippet
+snippet sm "PHP Class Setter"
+/**
+ * Sets the value of ${1:foo}
+ *
+ * @param ${2:string} $$1 ${3:description}
+ *
+ * @return ${4:`vim_snippets#Filename()`}
+ */
+${5:public} function set${6:$1}(${7:$2 }$$1)
+{
+	$this->${8:$1} = $$1;
+
+	return $this;
+}
+endsnippet
+snippet gm "PHP Class Getter Setter"
+/**
+ * Gets the value of ${1:foo}
+ *
+ * @return ${2:string}
+ */
+${3:public} function get${4:$1}()
+{
+	return $this->${5:$1};
+}
+endsnippet
+snippet inc "php include" b
+	include '${1:file}';
+endsnippet
+snippet inc1 "php include_once" b
+	include_once '${1:file}';
+endsnippet
+snippet /* "comment block" b
+/**
+ * ${0}
+ */
+endsnippet
+snippet doc_cp "documented comment Block" b
+/**
+ * ${1:undocumented class}
+ *
+ * @package ${2:default}
+ * @subpackage ${3:default}
+ * @author ${4:`g:snips_author`}
+ */
+endsnippet
+snippet doc_vp "comment block" b
+/**
+ * ${1:undocumented class variable}
+ *
+ * @var ${2:string}
+ */
+endsnippet
+snippet doc_v "comment block" b
+/**
+ * ${3:undocumented class variable}
+ *
+ * @var ${4:string}
+ */
+${1:var} $${2};
+endsnippet
+snippet doc_c "comment block" b
+/**
+ * ${3:undocumented class}
+ *
+ * @package ${4:default}
+ * @subpackage ${5:default}
+ * @author ${6:`g:snips_author`}
+ */
+${1:}class ${2:}
+{
+	${0}
+} // END $1class $2
+endsnippet
+snippet doc_dp "comment block" b
+/**
+ * ${1:undocumented constant}
+ */
+endsnippet
+snippet wh "while (condition) { ... }" b
+while (${1:/* condition */}) {
+	${0}
+}
+endsnippet
+snippet do "do { ... } while (condition)" b
+do {
+	${0}
+} while (${1});
+endsnippet
+snippet ifn "if (!condition) { ... }" b
+if (!${1}) {
+	${2}
+}
+endsnippet
+snippet ife "if (cond) { ... } else { ... }" b
+if (${1}) {
+	${2}
+} else {
+	${3}
+}
+endsnippet
+snippet for "for ($i = 0; $i < $count; $i++) { ... }" b
+for ($${2:i} = 0; $$2 < ${1:count}; $$2${3:++}) {
+	${0}
+}
+endsnippet
+snippet foreach "foreach ($var as $value) { .. }" b
+foreach ($${1:variable} as $${2:value}) {
+	${0}
+}
+endsnippet
+snippet foreachk "foreach ($var as $key => $value) { .. }" b
+foreach ($${1:variable} as $${2:key} => $${3:value}) {
+	${0}
+}
+endsnippet
+snippet try "try { ... } catch (Exception $e) { ... }"
+try {
+	${1}
+} catch (\Exception $e) {
+	${2}
+}
+endsnippet
+snippet rett
+return true;
+endsnippet
+snippet retf
+return false;
+endsnippet
+snippet am
+$${1:foo} = array_map(function($${2:v}) {
+	${0}
+	return $$2;
+}, $$1);
+endsnippet
+snippet aw
+array_walk($${1:foo}, function(&$${2:v}, $${3:k}) {
+	$$2 = ${0};
+});
+endsnippet
+# static var assign once
+snippet static_var
+static $${1} = null;
+if (is_null($$1)){
+	$$1 = ${2};
+}
+endsnippet
+snippet ase "$this->assertEquals()"
+$this->assertEquals(${1:expected}, ${2:actual});
+endsnippet
+snippet asne "$this->assertNotEquals()"
+$this->assertNotEquals(${1:expected}, ${2:actual});
+endsnippet
+snippet asf "$this->assertFalse()"
+$this->assertFalse(${1});
+endsnippet
+snippet ast "$this->assertTrue()"
+$this->assertTrue(${1});
+endsnippet
+snippet asfex "$this->assertFileExists()"
+$this->assertFileExists(${1:'path/to/file'});
+endsnippet
+snippet asfnex "$this->assertFileNotExists()"
+$this->assertFileNotExists(${1:'path/to/file'});
+endsnippet
+snippet ascon "$this->assertContains()"
+$this->assertContains(${1:$needle}, ${2:$haystack});
+endsnippet
+snippet ashk "$this->assertArrayHasKey()"
+$this->assertArrayHasKey(${1:$key}, ${2:$array});
+endsnippet
+snippet asnhk "$this->assertArrayNotHasKey()"
+this->assertArrayNotHasKey(${1:$key}, ${2:$array});
+endsnippet
+snippet ascha "$this->assertClassHasAttribute()"
+$this->assertClassHasAttribute(${1:$attributeName}, '${2:$className}');
+endsnippet
+snippet asi "$this->assertInstanceOf(...)"
+$this->assertInstanceOf(${1:expected}, ${2:actual});
+endsnippet
+snippet test "public function testXYZ() { ... }"
+public function test${1}()
+{
+	${0}
+}
+endsnippet
+snippet setup "protected function setUp() { ... }"
+protected function setUp()
+{
+	${0}
+}
+endsnippet
+snippet teardown "protected function tearDown() { ... }"
+protected function tearDown()
+{
+	${0}
+}
+endsnippet
+snippet exp "phpunit expects"
+expects($this->${1:once}())
+	->method('${2}')
+	->with($this->equalTo(${3})${4})
+	->will($this->returnValue(${5}));
+endsnippet
+snippet testcmt "phpunit comment with group"
+/**
+* @group ${1}
+*/
+endsnippet
+snippet fail "$this->fail()"
+$this->fail(${1});
+endsnippet
+snippet marki "$this->markTestIncomplete()"
+$this->markTestIncomplete(${1});
+endsnippet
+snippet marks "$this->markTestSkipped()"
+$this->markTestSkipped(${1});
+endsnippet
+# end of phpunit snippets
+snippet te "throw new Exception()"
+throw new ${1:Exception}("${2:Error Processing Request}");
+endsnippet
+snippet fpc "file_put_contents" b
+file_put_contents(${1:file}, ${2:content}${3:, FILE_APPEND});$0
+endsnippet
+snippet sr "str_replace"
+str_replace(${1:search}, ${2:replace}, ${3:subject})$0
+endsnippet
+snippet ia "in_array"
+in_array(${1:needle}, ${2:haystack})$0
+endsnippet
+snippet is "isset"
+isset(${1:var})$0
+endsnippet
+snippet isa "isset array"
+isset($${1:array}[${2:key}])$0
+endsnippet
+snippet in "is_null"
+is_null($${1:var})$0
+endsnippet
+snippet fe "file_exists"
+file_exists(${1:file})$0
+endsnippet
+snippet id "is_dir"
+is_dir(${1:path})$0
+endsnippet
+snippet pub "public function"
+public function ${1}(${2}){
+	${3}
+}
+${4}
+endsnippet
+snippet boot "event-laravel"
+public static function boot(){
+	parent::boot();
+	self::${1:deleting}(function($${2:model}){
+		${3}
+	});
+}
+${4}
+endsnippet
+snippet valid "validation"
+$messages = [
+	'required' => ':attribute Harus Diisi',
+];
+$rules = [
+	'${1}' => '${2}',
+];
+
+$validator = \Validator::make(Input::all(), $rules, $messages);
+
+if ($validator->fails())
+{
+	return \Redirect::back()->withErrors($validator)->withInput();
+}
+endsnippet
+snippet jurnal "Inser Jurnal Umum"
+$jurnal                  = new JurnalUmum;
+$jurnal->jurnalable_id   = ${1}; // id referensi yang baru dibuat
+$jurnal->jurnalable_type = 'App\\${2}';
+$jurnal->coa_id          = Input::get('coa_id');
+$jurnal->debit           = 1;
+$jurnal->nilai           = ${4};
+$jurnal->save();
+
+$jurnal                  = new JurnalUmum;
+$jurnal->jurnalable_id   = $1;// id referensi yang baru dibuat
+$jurnal->jurnalable_type = 'App\\${2}';
+$jurnal->coa_id          = ${3}; // Kas di tangan 110004, Kas di kasir 110000, 
+$jurnal->debit           = 0;
+$jurnal->nilai           = $4;
+$jurnal->save();
+${5}
+endsnippet
+snippet create "create Eloquent"
+$${1}       = new ${2};
+$$1->${3}   = ${4};
+$$1->save();
+endsnippet
+snippet update "update Eloquent"
+$${1}       = ${2}::find(${3});
+$$1->${4}   = ${5};
+$$1->save();
+endsnippet
+snippet belongsTo "model relations"
+public function ${1}(){
+	return $this->belongsTo('App\\${2});
+}
+endsnippet
+snippet Inp "Input::get('param')"
+Input::get('${1:name}')${2:;}${3}
+endsnippet
+snippet db "query builder"
+$${1:periksas } = DB::select($${2:query });${3}
+endsnippet
+snippet all "Input::all()"
+dd(Input::all()); ${1}
+endsnippet
+snippet redirect
+$pesan = Yoga::${1:gagal}Flash(${2});
+return redirect(${3})${4:->back()}->withPesan($pesan);
+endsnippet
+snippet transact
+DB::beginTransaction();
+try {
+	${1}
+	DB::commit();
+} catch (\Exception $e) {
+	DB::rollback();
+	throw $e;
+}
+endsnippet
+snippet timestamp
+$timestamp = date('Y-m-d H:i:s');
+endsnippet
+snippet timestamp_array
+'created_at' => $timestamp,
+'updated_at' => $timestamp
+endsnippet
+snippet view
+return view('${1}', compact(
+	'${2}'
+));
+endsnippet
+snippet query
+$query  = "SELECT ${1}";
+$query .= "FROM ${2}";
+$data = DB::select($query);
+endsnippet
+snippet r
+return ${1}
+endsnippet
+snippet dd
+dd( ${1} )${2}
+endsnippet
+snippet template_method "controller template" b
+use App\Model;
+use Input;
+use App\Yoga;
+use DB;
+public function index(){
+	$model_plural = Model::all();
+	return view('model_plural.index', compact(
+		'model_plural'
+	));
+}
+public function create(){
+	return view('model_plural.create');
+}
+public function edit($id){
+	$model_singular = Model::find($id);
+	return view('model_plural.edit', compact('model_singular'));
+}
+public function store(Request $request){
+	dd( Input::all() );
+	if ($this->valid( Input::all() )) {
+		return $this->valid( Input::all() );
+	}
+	$model_singular = new Model;
+	$model_singular = $this->processData($model_singular);
+
+	$pesan = Yoga::suksesFlash('Model baru berhasil dibuat');
+	return redirect('model_plural')->withPesan($pesan);
+}
+public function update($id, Request $request){
+	if ($this->valid( Input::all() )) {
+		return $this->valid( Input::all() );
+	}
+	$model_singular = Model::find($id);
+	$model_singular = $this->processData($model_singular);
+
+	$pesan = Yoga::suksesFlash('Model berhasil diupdate');
+	return redirect('model_plural')->withPesan($pesan);
+}
+public function destroy($id){
+	Model::destroy($id);
+	$pesan = Yoga::suksesFlash('Model berhasil dihapus');
+	return redirect('model_plural')->withPesan($pesan);
+}
+
+public function processData($model_singular){
+	dd( 'processData belum diatur' );
+	$model_singular = $this->model_singular;
+	$model_singular->save();
+
+	return $model_singular;
+}
+public function import(){
+	return 'Not Yet Handled';
+	$file      = Input::file('file');
+	$file_name = $file->getClientOriginalName();
+	$file->move('files', $file_name);
+	$results   = Excel::load('files/' . $file_name, function($reader){
+		$reader->all();
+	})->get();
+	$model_plural     = [];
+	$timestamp = date('Y-m-d H:i:s');
+	foreach ($results as $result) {
+		$model_plural[] = [
+
+			// Do insert here
+
+			'created_at' => $timestamp,
+			'updated_at' => $timestamp
+		];
+	}
+	Model::insert($model_plural);
+	$pesan = Yoga::suksesFlash('Import Data Berhasil');
+	return redirect()->back()->withPesan($pesan);
+}
+private function valid( $data ){
+	dd( 'validasi belum diatur' );
+	$messages = [
+		'required' => ':attribute Harus Diisi',
+	];
+	$rules = [
+		'data'           => 'required',
+	];
+	$validator = \Validator::make($data, $rules, $messages);
+	
+	if ($validator->fails())
+	{
+		return \Redirect::back()->withErrors($validator)->withInput();
+	}
+}
+endsnippet
+snippet r "php" b
+return ${1}
+endsnippet
+snippet dd
+dd( ${1} )${2:;}
+endsnippet
+snippet find
+$${1:model} = ${2:Model}::find( ${3:$id} );
+endsnippet
+snippet destroy
+$${1:Model}::destroy( ${2:$id} );
+endsnippet
